@@ -21,6 +21,8 @@ library(ggthemes)
 library(Cairo)
 library(scales)
 
+options(repr.plot.width=5, repr.plot.height=4)
+
 # Import the data
 appt <- read.csv("KaggleV2-May-2016.csv", header=T, stringsAsFactors = F) 
 # Convert gender and outcome variable to numeric
@@ -191,7 +193,7 @@ ggplot(da_results, aes(x=feature, y=general_dominance_weights)) +
   geom_bar(stat="identity", fill="#3683c1") +
   expand_limits(y = 10) +
   ggtitle("Dominance Analysis - General Dominance Weights") +
-  labs(x="", y="Percentage Variance Attributable to Each Feature (%)") +
+  labs(x="", y="Percentage Variance Attributable (%)") +
   theme_minimal() +
   scale_y_continuous(labels = comma) +
   theme(plot.title = element_text(size=18, hjust=.5),
@@ -207,7 +209,7 @@ ggplot(da_results, aes(x=feature, y=da_results_relative)) +
   geom_bar(stat="identity", fill="#3683c1") +
   expand_limits(y=100) +
   ggtitle("Dominance Analysis - Relative Dominance Weights") +
-  labs(x="", y="Relative Percentage Variance Attributable to Each Feature (%)") +
+  labs(x="", y="Relative Percentage Variance Attributable (%)") +
   theme_minimal() +
   scale_y_continuous(labels = comma) +
   theme(plot.title = element_text(size=18, hjust=.5),
