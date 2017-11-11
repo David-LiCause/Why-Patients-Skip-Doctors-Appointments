@@ -1,17 +1,15 @@
 ---
 title: "Why Do Patients Skip Doctor's Appointments?"
-author: "David LiCause"
-date: "November 11, 2017"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 ---
-
-# Why Do Patients Skip Doctor's Appointments?
 
 In this project I apply ANOVA and Dominance Analysis to investigate the causes of why patients skip their scheduled doctor's appointments. 
 
 The data set comes from Kaggle (https://www.kaggle.com/joniarroba/noshowappointments) and includes demographic and contextual data for over 62,000 patients from Vitoria, Brazil. 
 
-```{r setup, include=FALSE}
+```{r message=FALSE, warning=FALSE}
 
 library(dplyr)
 library(tidyr)
@@ -20,8 +18,11 @@ library(yhat)
 library(ggthemes)
 library(Cairo)
 library(scales)
+```
 
+``` {r}
 options(repr.plot.width=5, repr.plot.height=4)
+options(scipen = 99)
 
 # Import the data
 appt <- read.csv("KaggleV2-May-2016.csv", header=T, stringsAsFactors = F) 
@@ -193,7 +194,7 @@ ggplot(da_results, aes(x=feature, y=general_dominance_weights)) +
   geom_bar(stat="identity", fill="#3683c1") +
   expand_limits(y = 10) +
   ggtitle("Dominance Analysis - General Dominance Weights") +
-  labs(x="", y="Percentage Variance Attributable (%)") +
+  labs(x="", y="Percentage Variance Explained (%)") +
   theme_minimal() +
   scale_y_continuous(labels = comma) +
   theme(plot.title = element_text(size=18, hjust=.5),
@@ -209,7 +210,7 @@ ggplot(da_results, aes(x=feature, y=da_results_relative)) +
   geom_bar(stat="identity", fill="#3683c1") +
   expand_limits(y=100) +
   ggtitle("Dominance Analysis - Relative Dominance Weights") +
-  labs(x="", y="Relative Percentage Variance Attributable (%)") +
+  labs(x="", y="Relative Percentage Variance Explained (%)") +
   theme_minimal() +
   scale_y_continuous(labels = comma) +
   theme(plot.title = element_text(size=18, hjust=.5),
